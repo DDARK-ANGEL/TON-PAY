@@ -19,10 +19,11 @@ def get_info(request):
 
 def pay(request):
     merchant = '2233'
-    id = '01'
+    iid = '01'
     comment = '12345'
+    qwee = merchant + '-' + iid
 
-    check_url = f'/check?check_id={merchant + '-' + id}'
+    check_url = f'/check?check_id={qwee}'
 
     try:
         wallet = Wallet.objects.filter(merchant=merchant).values('wallet')[0]['wallet']
