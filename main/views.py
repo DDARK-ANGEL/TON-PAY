@@ -19,6 +19,8 @@ def get_info(request):
 
 def pay(request):
     merchant = '2233'
+    id = '01'
+    comment = '12345'
 
     check_url = f'/check?check_id={merchant + '-' + id}'
 
