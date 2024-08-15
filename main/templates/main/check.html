@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка оплаты</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #121212, #333);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #ccc;
+            overflow: hidden;
+        }
+        .confirmation-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: neonGlow 3s infinite alternate-reverse;
+        }
+        .confirmation-container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: #ffcc00;
+        }
+        .confirmation-container p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 20px auto;
+            color: #aaa;
+        }
+        .loading, .checkmark {
+            width: 60px;
+            height: 60px;
+            margin: 20px auto;
+        }
+        .loading {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+        .checkmark {
+            display: none;
+            font-size: 2em;
+            color: #4caf50;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .status.success .checkmark {
+            display: inline-block;
+        }
+        .status.success .loading {
+            display: none;
+        }
+        .status.loading .checkmark {
+            display: none;
+        }
+        .status.loading .loading {
+            display: inline-block;
+        }
+        .note {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes neonGlow {
+            0% {
+                box-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff;
+            }
+            50% {
+                box-shadow: 0 0 15px #007bff, 0 0 25px #007bff, 0 0 35px #007bff;
+            }
+            100% {
+                box-shadow: 0 0 20px #007bff, 0 0 30px #007bff, 0 0 40px #007bff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>Проверка оплаты</h1>
+        <p>Сумма оплаты: <strong>{{ sum }} TON</strong></p>
+        <div class="status {% if payment_status %}success{% endif %}">
+            <div class="loading"></div>
+            <div class="checkmark">✔️</div>
+            <div class="status-text">
+                {% if payment_status %}
+                    Платёж получен
+                {% else %}
+                    Проверка статуса оплаты
+                {% endif %}
+            </div>
+        </div>
+        <div class="note">
+            Обновите страницу для определения статуса оплаты
+        </div>
+    </div>
+</body>
+</html>
